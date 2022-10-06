@@ -1,7 +1,6 @@
 // Creating the map object
 var myMap = L.map("map", {
-  center: [
-    0, 0],
+  center: [0, 0],
   zoom: 2,
 });
 
@@ -11,190 +10,133 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(myMap);
 
 // Use this link to get the GeoJSON data.
-var link = "/static/data/countries.geojson";
-var summaryData = "/static/data/1990_2022_summary.csv"
-
-// The function that will determine the color of a neighborhood based on the borough that it belongs to
-// function chooseColor(instances) {
-//   if (instances > 721) return "dark blue";
-//   else if (instances > 541) return "blue";
-//   else if (instances > 361) return "aqua";
-//   else if (instances > 181) return "light green";
-//   else return "yellow";
-// }
-
-function chooseColor(country, instances) {
-  if (instances > 721) shade = 'navy';
-  else if (instances > 541) shade = "blue";
-  else if (instances > 361) shade = "aqua";
-  else if (instances > 181) shade = "lightgreen";
-  else shade = "yellow";
-}
-
-let shadeArray = []
-
-d3.csv(summaryData).then(function (data) {
-  for (row of data) {
-    country = row.country
-    instances = row.total_occurences
-    chooseColor(country, instances)
-    let colorCollection = { country, shade }
-    shadeArray.push(colorCollection)
-  }
-});
+const link = "/static/data/countries.geojson";
+const summaryData = "/static/data/1990_2022_summary.csv";
 
 
-function matchColor(geoCountry) {
-  for (row of shadeArray) {
-    if (row.country === geoCountry) {
-      return row.shade
+function chooseColor(instances) {
+  if (instances > 721) return 'navy';
+  else if (instances > 541) return "blue";
+  else if (instances > 361) return "aqua";
+  else if (instances > 181) return "lightgreen";
+  else return "yellow";
+};
+
+let features = []
+function init(){
+d3.json(link).then(function (data) {
+  let geo = data['features']
+  geodata = geo
+  // let features = []
+  d3.csv(summaryData).then(function (data) {
+    for (row of data) {
+      country = row.country
+      instances = parseInt(row.total_occurences)
+      deaths = parseInt(row.total_deaths)
+      affected = parseInt(row.total_affected)
+      try {
+        let geometry = geodata.filter(row => row["properties"].ADMIN === country)[0].geometry
+        let properties = { country, instances, deaths, affected }
+        features.push({ "type": "Feature", properties, "geometry": geometry })
+      }
+      catch (error) {
+        console.log(country)
+      }
+      finally {
+        continue
+      }
     }
-    else console.log(geoCountry);continue
-  }
-}
-d3.json(link).then(function (geodata) {
-  let geo = geodata['features'];
-  for (row of geo) {
-    let collection = row
-    let geoCountry = collection["properties"].ADMIN
-    L.geoJson(collection, {
-      // Styling each feature (in this case, a neighborhood)
-      style: function (feature) {
-        return {
-          color: "white",
-          // Call the chooseColor() function to decide which color to color our neighborhood. (The color is based on the borough.)
-          fillColor: matchColor(geoCountry),
-          fillOpacity: 0.5,
-          weight: 1.5
-        };
+    let summaryGeoJson = { type: "FeatureCollect", features }
+    L.choropleth(summaryGeoJson, {
+
+      // Define which property in the features to use.
+      valueProperty: "deaths",
+
+      // Set the color scale.
+      scale: ["#ffffb2", "#b10026"],
+
+      // The number of breaks in the step range
+      steps: 10,
+
+      // q for quartile, e for equidistant, k for k-means
+      mode: "q",
+      style: {
+        // Border color
+        color: "#fff",
+        weight: 1,
+        fillOpacity: 0.8
       },
-      // This is called on each feature.
+
+      // Binding a popup to each layer
       onEachFeature: function (feature, layer) {
-        // Set the mouse events to change the map styling.
-        layer.on({
-          // When a user's mouse cursor touches a map feature, the mouseover event calls this function, which makes that feature's opacity change to 90% so that it stands out.
-          mouseover: function (event) {
-            layer = event.target;
-            layer.setStyle({
-              fillOpacity: 0.9
-            });
-          },
-          // When the cursor no longer hovers over a map feature (that is, when the mouseout event occurs), the feature's opacity reverts back to 50%.
-          mouseout: function (event) {
-            layer = event.target;
-            layer.setStyle({
-              fillOpacity: 0.5
-            });
-          },
-          // When a feature (neighborhood) is clicked, it enlarges to fit the screen.
-          click: function (event) {
-            myMap.fitBounds(event.target.getBounds());
-          }
-        });
-        // Giving each feature a popup with information that's relevant to it
-        // layer.bindPopup("<h1>" + feature.properties.neighborhood + "</h1> <hr> <h2>" + feature.properties.borough + "</h2>");
+        layer.bindPopup("<strong>" + feature.properties.country + "</strong><br /><br />Total Deaths: " +
+          feature.properties.deaths + "<br /><br />Total Affected: "+feature.properties.affected+ "<br /><br />Total Occurences: "+feature.properties.instances);
       }
     }).addTo(myMap);
+  })
+});}
+init();
 
-  }
-})
 
+// let summaryGeoJson = { type: "FeatureCollect", features }
+// function init() {
+//   L.choropleth(summaryGeoJson, {
 
+//     // Define which property in the features to use.
+//     valueProperty: "deaths",
 
-// d3.csv(summaryData).then(function (data) {
-//   for (row of data) {
-//     country = row.country
-//     instances = row.total_occurences
-//     d3.json(link).then(function (geodata) {
-//       geo = geodata['features'];
-//       for (row of geo) {
-//         collection = row
-//         geoCountry = collection["properties"].ADMIN
-//         if (geoCountry === country) {
-//           L.geoJson(collection, {
-//             // Styling each feature (in this case, a neighborhood)
-//             style: function (feature) {
-//               return {
-//                 color: "white",
-//                 // Call the chooseColor() function to decide which color to color our neighborhood. (The color is based on the borough.)
-//                 fillColor: chooseColor(instances),
-//                 fillOpacity: 0.5,
-//                 weight: 1.5
-//               };
-//             },
-//             // This is called on each feature.
-//             onEachFeature: function (feature, layer) {
-//               // Set the mouse events to change the map styling.
-//               layer.on({
-//                 // When a user's mouse cursor touches a map feature, the mouseover event calls this function, which makes that feature's opacity change to 90% so that it stands out.
-//                 mouseover: function (event) {
-//                   layer = event.target;
-//                   layer.setStyle({
-//                     fillOpacity: 0.9
-//                   });
-//                 },
-//                 // When the cursor no longer hovers over a map feature (that is, when the mouseout event occurs), the feature's opacity reverts back to 50%.
-//                 mouseout: function (event) {
-//                   layer = event.target;
-//                   layer.setStyle({
-//                     fillOpacity: 0.5
-//                   });
-//                 },
-//                 // When a feature (neighborhood) is clicked, it enlarges to fit the screen.
-//                 click: function (event) {
-//                   myMap.fitBounds(event.target.getBounds());
-//                 }
-//               });
-//               // Giving each feature a popup with information that's relevant to it
-//               // layer.bindPopup("<h1>" + feature.properties.neighborhood + "</h1> <hr> <h2>" + feature.properties.borough + "</h2>");
-//             }
-//           }).addTo(myMap);
-//         }
-//       }
-//     })
-//   }
-// })
+//     // Set the color scale.
+//     scale: ["#ffffb2", "#b10026"],
 
-// // Getting our GeoJSON data
-// d3.json(link).then(function (data) {
-//   // Creating a GeoJSON layer with the retrieved data
-//   L.geoJson(data, {
-//     // Styling each feature (in this case, a neighborhood)
-//     style: function (feature) {
-//       return {
-//         color: "white",
-//         // Call the chooseColor() function to decide which color to color our neighborhood. (The color is based on the borough.)
-//         fillColor: chooseColor(feature.properties.borough),
-//         fillOpacity: 0.5,
-//         weight: 1.5
-//       };
+//     // The number of breaks in the step range
+//     steps: 10,
+
+//     // q for quartile, e for equidistant, k for k-means
+//     mode: "q",
+//     style: {
+//       // Border color
+//       color: "#fff",
+//       weight: 1,
+//       fillOpacity: 0.8
 //     },
-//     // This is called on each feature.
-//     onEachFeature: function (feature, layer) {
-//       // Set the mouse events to change the map styling.
-//       layer.on({
-//         // When a user's mouse cursor touches a map feature, the mouseover event calls this function, which makes that feature's opacity change to 90% so that it stands out.
-//         mouseover: function (event) {
-//           layer = event.target;
-//           layer.setStyle({
-//             fillOpacity: 0.9
-//           });
-//         },
-//         // When the cursor no longer hovers over a map feature (that is, when the mouseout event occurs), the feature's opacity reverts back to 50%.
-//         mouseout: function (event) {
-//           layer = event.target;
-//           layer.setStyle({
-//             fillOpacity: 0.5
-//           });
-//         },
-//         // When a feature (neighborhood) is clicked, it enlarges to fit the screen.
-//         click: function (event) {
-//           myMap.fitBounds(event.target.getBounds());
-//         }
-//       });
-//       // Giving each feature a popup with information that's relevant to it
-//       layer.bindPopup("<h1>" + feature.properties.neighborhood + "</h1> <hr> <h2>" + feature.properties.borough + "</h2>");
 
+//     // Binding a popup to each layer
+//     onEachFeature: function (feature, layer) {
+//       layer.bindPopup("<strong>" + feature.properties.country + "</strong><br /><br />Total Deaths: " +
+//         feature.properties.deaths + "<br /><br />Estimated Total Income and Benefits for Families: $");
 //     }
 //   }).addTo(myMap);
-// });
+//   // Set up the legend.
+//   //   // var legend = L.control({ position: "bottomright" });
+//   //   // legend.onAdd = function() {
+//   //   //   var div = L.DomUtil.create("div", "info legend");
+//   //   //   var limits = geojson.options.limits;
+//   //   //   var colors = geojson.options.colors;
+//   //   //   var labels = [];
+
+//   //   //   // Add the minimum and maximum.
+//   //   //   var legendInfo = "<h1>Population with Children<br />(ages 6-17)</h1>" +
+//   //   //     "<div class=\"labels\">" +
+//   //   //       "<div class=\"min\">" + limits[0] + "</div>" +
+//   //   //       "<div class=\"max\">" + limits[limits.length - 1] + "</div>" +
+//   //   //     "</div>";
+
+//   //   //   div.innerHTML = legendInfo;
+
+//   //   //   limits.forEach(function(limit, index) {
+//   //   //     labels.push("<li style=\"background-color: " + colors[index] + "\"></li>");
+//   //   //   });
+
+//   //   //   div.innerHTML += "<ul>" + labels.join("") + "</ul>";
+//   //   //   return div;
+//   //   // };
+
+//   //   // Adding the legend to the map
+//   //   // legend.addTo(myMap);
+
+//   // }) 
+// };
+
+// init();
+
+
