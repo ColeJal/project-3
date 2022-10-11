@@ -23,18 +23,36 @@ conn = psycopg2.connect(rds_connection_string, sslmode='require')
 
 def get_summary():
     cur = conn.cursor()
-    cur.execute('SELECT * FROM summary;')
+    cur.execute('SELECT * FROM larger_summary;')
     summary = cur.fetchall()
     return summary
 def get_data():
     cur = conn.cursor()
-    cur.execute('SELECT * FROM disaster_data;')
+    cur.execute('SELECT * FROM disasters;')
     disaster_data=cur.fetchall()
     return disaster_data
+def get_decade():
+    cur = conn.cursor()
+    cur.execute('SELECT * FROM decade_breakdown;')
+    decade = cur.fetchall()
+    return decade
+def get_continent_bd():
+    cur = conn.cursor()
+    cur.execute('SELECT * FROM continent_breakdown;')
+    continent_breakdown = cur.fetchall()
+    return continent_breakdown
+def get_continent_decade():
+    cur = conn.cursor()
+    cur.execute('SELECT * FROM continent_decade;')
+    continent_decade = cur.fetchall()
+    return continent_decade
+
+
+
 
 @app.route("/")
 def home():
-    return render_template('index.html')
+    return render_template('index2.html')
 
 @app.route("/summary")
 def summary():
@@ -45,6 +63,28 @@ def summary():
 def disaster():
     disaster = get_data()
     return jsonify(disaster)
+
+@app.route("/decade")
+def decade():
+    decade = get_decade()
+    return jsonify(decade)
+
+@app.route("/climate")
+def climate():
+    return render_template('climate.html')
+
+@app.route("/world")
+def world():
+    return render_template('world.html')
+@app.route("/continent_breakdown")
+def continent_breakdown():
+    continent_breakdown=get_continent_bd()
+    return jsonify(continent_breakdown)
+@app.route("/continent_decade")
+def continent_decade():
+    continent_decade=get_continent_decade()
+    return jsonify(continent_decade)
+
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -62,7 +62,7 @@ d3.json("http://127.0.0.1:5000/summary").then(function(data){
   }
   let traceData=[trace1];
   let layout = {
-    title: "Top 10 Counties with Most Total Deaths",
+    title: "Top 10 Countries with Most Total Deaths",
     margin: {
       l: 100,
       r: 100,
@@ -84,10 +84,10 @@ let features = [];
 function init() {
   d3.json("http://127.0.0.1:5000/disaster").then(function (data) {
     let disasters2022 = data.filter(row => row[1] == 2022)
-    let top10 = disasters2022.sort((a, b) => b[22] - a[22]).slice(0, 10)
+    let top10 = disasters2022.sort((a, b) => b[15] - a[15]).slice(0, 11)
     for (row of top10) {
-      L.marker([row[33], row[34]]).bindPopup(`<h3>Location: ${row[30]}</h3><hr><h3>Date: ${row[31]}</h3>
-        <h4><h3>Disaster Type: ${row[5]}</h3><hr><h3>Deaths: ${row[22]}</h3><hr><h3>Affected: ${row[23]}</h3>`)
+      L.marker([row[20], row[21]]).bindPopup(`<h3>Location: ${row[8]}</h3><hr><h3>Country: ${row[4]}</h3><hr><h3>Date: ${row[18]}</h3>
+        <h4><h3>Disaster Type: ${row[3]}</h3><hr><h3>Deaths: ${row[15]}</h3><hr><h3>Affected: ${row[16]}</h3>`)
         .addTo(top10markers);
       top10markers.addTo(myMap);
     }
@@ -99,7 +99,7 @@ function init() {
     d3.json("http://127.0.0.1:5000/summary").then(function (data) {
       for (row of data) {
         country = row[0]
-        instances = parseInt(row[10])
+        instances = parseInt(row[5])
         deaths = parseInt(row[2])
         affected = parseInt(row[3])
         try {
@@ -149,7 +149,7 @@ function init() {
         var colors = deathlayer.options.colors;
         var labels = [];
 
-        var legendInfo = "<h3>Totals from 1990 - 2022<br/></h2>" +
+        var legendInfo = "<h3>Data from 1990 - 2022<br/></h2>" +
           "<div class=\"labels\">" +
           // "<div class=\"min\">" + limits[0] + "</div>" +
           // "<div class=\"max\">" + limits[limits.length - 1] + "</div>" +
@@ -172,7 +172,7 @@ function init() {
         // Define which property in the features to use.
         valueProperty: "instances",
         // Set the color scale.
-        scale: ["#ffffb2", "#b10026"],
+        scale: ["#f2f0f7", "#54278f"],
         // The number of breaks in the step range
         steps: 10,
         // q for quartile, e for equidistant, k for k-means
@@ -220,7 +220,7 @@ function init() {
         // Define which property in the features to use.
         valueProperty: "affected",
         // Set the color scale.
-        scale: ["#ffffb2", "#b10026"],
+        scale: ["#eff3ff", "#08519c"],
         // The number of breaks in the step range
         steps: 10,
         // q for quartile, e for equidistant, k for k-means
