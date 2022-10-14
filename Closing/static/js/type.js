@@ -291,37 +291,5 @@ function init() {
     mapping();
     LinePlots(dSets[0]);
     feather.replace({ 'aria-hidden': 'true' })
-    d3.json("http://127.0.0.1:5000/tempchange").then(function(data){
-    // let colors=[]    
-    for (row of data){
-            if (row[1]>0){
-                color.push('blue')
-            }
-            else {
-                color.push('red')
-            }
-        }
-        let tempData = [{
-            x:data.map(row=>row[0]),
-            y:data.map(row=>row[1]),
-            type:'bar',
-            marker:{
-                color:color
-            }
-        }]
-        let tempLayout = {
-            title: `Land and Sea Temperature Change`,
-            xaxis:{
-                title:'Year'
-            },
-            yaxis: {
-                title:'Degrees Celsius',
-                automargin: true
-              },
-              paper_bgcolor: 'rgba(245,246,249,1)',
-              plot_bgcolor: 'rgba(245,246,249,1)',
-          };
-          Plotly.newPlot("temp_plot", tempData, tempLayout);
-    })
 }
 init();
