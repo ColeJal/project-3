@@ -1,8 +1,8 @@
 # Natural Disasters Around World
 Project #3 - October, 2022
 
-
-
+See our website at:
+https://n-disaster.herokuapp.com/type
 
 
 ![Logo](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGoJJBsuXLDEAUAk7qqQg-URz8Odn4BADnIA&usqp=CAU) 
@@ -53,13 +53,13 @@ Project #3 - October, 2022
 ## 🔗 Links
 
 Jaleel Cole
-[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](linkedin.com/in/jaleel-cole215)
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/jaleel-cole215/)
 
 Kenneth Condit
 [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/ken-condit-402a6b203/)
 
 Nigel Itchon
-[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](www.linkedin.com/in/nitchon)
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/nitchon/)
 
 Natalia Moreno Bautista
 [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/)
