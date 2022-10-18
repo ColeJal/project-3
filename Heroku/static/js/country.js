@@ -1,27 +1,3 @@
-// d3.json("http://127.0.0.1:5000/summary").then(function (data) {
-//     let most_deaths = data.sort((a, b) => b[2] - a[2]).slice(0, 10).reverse();
-//     let trace1 = {
-//         x: most_deaths.map(object => object[2]),
-//         y: most_deaths.map(object => object[0]),
-//         text: most_deaths.map(object => object[0]),
-//         name: "Most Deaths",
-//         type: 'bar',
-//         orientation: 'h'
-//     }
-//     let traceData = [trace1];
-//     let layout = {
-//         title: "Top 10 Countries with Most Total Deaths",
-//         margin: {
-//             l: 100,
-//             r: 100,
-//             t: 100,
-//             b: 100
-//         }
-//     };
-//     Plotly.newPlot("plot", traceData, layout);
-// })
-
-
 var world = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 });
@@ -183,60 +159,11 @@ function graphs(id) {
                 plot_bgcolor: 'rgba(245,246,249,1)',
             };
             Plotly.newPlot('lossPie', lossData, lossLayout)
-            // top3 = selection.sort((a, b) => b[4] - a[4]).slice(0, 3)
-            // let types = []
-            // for (row of top3) {
-            //     types.push(row[2])
-            // }
-            // d3.json('http://127.0.0.1:5000/countryYearly').then(function (data) {
-            //     lineSelection = data.filter(obj => obj[0] === types[0])
-            //     let traceData = [{
-            //         x: lineSelection.map(obj => obj[1]),
-            //         y: lineSelection.map(obj => obj[4]),
-            //         mode: 'lines+markers',
-            //         name: top5[0][1]
-            //     }]
-            //     let layout = {
-            //         title: `Decadal Averages of Deaths for ${types[0]}`
-            //     };
-            //     Plotly.newPlot('line', traceData, layout)
-            // })
         })
     })
 
 }
 
-
-
-
-
-// function LinePlots(Lineid) {
-//     d3.json("http://127.0.0.1:5000/countrySum").then(function (data) {
-//         dataSelect = data.filter(obj => obj[0] === id)
-//         top5 = dataSelect.sort((a, b) => b[3] - a[3]).slice(0, 5)
-//         d3.json('http://127.0.0.1:5000/countryBD').then(function (data) {
-//             selection = data.filter(obj => obj[0] === top5[0][1])
-//             top3 = selection.sort((a, b) => b[4] - a[4]).slice(0, 3)
-//             let types = []
-//             for (row of top3) {
-//                 types.push(row[2])
-//             }
-//             d3.json('http://127.0.0.1:5000/countryYearly').then(function (data) {
-//                 lineSelection = data.filter(obj => obj[0] === types[0])
-//                 let traceData = [{
-//                     x: lineSelection.map(obj => obj[1]),
-//                     y: lineSelection.map(obj => obj[4]),
-//                     mode: 'lines+markers',
-//                     name: top5[0][1]
-//                 }]
-//                 let layout = {
-//                     title: `Decadal Averages of Deaths for ${types[0]}`
-//                 };
-//                 Plotly.newPlot('line', traceData, layout)
-//             })
-//         })
-//     })
-// }
 
 
 

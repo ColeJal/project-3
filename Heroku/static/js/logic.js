@@ -7,16 +7,6 @@ var world = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 });
 
-var sat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
-  maxZoom: 20,
-  subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
-});
-
-// var baseMaps = {
-//   "Satellite": sat,
-//   "Street Map": world,
-//   // "Topographic Map": topo
-// };
 var overlayMaps = {
   "Total Affected": affectedChoro,
   "Total Deaths": deathChoro,
@@ -40,28 +30,6 @@ L.control.layers(overlayMaps, markerLayer, {
 const link = "https://raw.githubusercontent.com/nitchon/project-3/main/Working%20Maps/static/data/countries.geojson";
 
 
-// d3.json("http://127.0.0.1:5000/summary").then(function(data){
-//   let most_deaths = data.sort((a,b)=>b[2]-a[2]).slice(0,10).reverse();
-//   let trace1 = {
-//     x:most_deaths.map(object=>object[2]),
-//     y:most_deaths.map(object=>object[0]),
-//     text:most_deaths.map(object=>object[0]),
-//     name:"Most Deaths",
-//     type:'bar',
-//     orientation:'h'
-//   }
-//   let traceData=[trace1];
-//   let layout = {
-//     title: "Top 10 Countries with Most Total Deaths",
-//     margin: {
-//       l: 100,
-//       r: 100,
-//       t: 100,
-//       b: 100
-//     }
-//   };
-//   Plotly.newPlot("plot", traceData, layout);
-// })
 
 
 var deathlayer;
@@ -138,7 +106,7 @@ function init() {
         var colors = deathlayer.options.colors;
         var labels = [];
 
-        var legendInfo = "<h3>Deaths from 1950 - 2022<br/></h2>" +
+        var legendInfo = "<h3>Data from 1950 - 2022<br/></h2>" +
           "<div class=\"labels\">" +
           // "<div class=\"min\">" + limits[0] + "</div>" +
           // "<div class=\"max\">" + limits[limits.length - 1] + "</div>" +
