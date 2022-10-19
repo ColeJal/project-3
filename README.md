@@ -2,19 +2,21 @@
 Project #3 - October, 2022
 
 See our website at:
-https://n-disaster.herokuapp.com/type
-
+https://n-disaster.herokuapp.com/
 
 ![Logo](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGoJJBsuXLDEAUAk7qqQg-URz8Odn4BADnIA&usqp=CAU) 
+# Description
+We explored the Natural Disaster occurences from around the world. The dataset used compiled each natural disaster in the EM-DAT (Emergency Events Database). To start using Pandas, we filtered the dataset only for natural disasters, deleted any unnecessary columns and converted dates to a usable format. From there, it was a matter of creating and save data files needed to final visualizations. We took advantage of Jupyter Notebook's interactive interface as well as Pandas and Matplotlib for quick visualizations and to get a sense of what is happening in the world.
 
 
 
-##  We explored the Natural Disaster occurences from around the world. The dataset used compiled each natural disaster in the EM-DAT (Emergency Events Database).  
 **_The following criteria must be met in order for an event to be entered into the database:_**
 ###  -    Deaths: 10 of more people deaths
 ###  -    Affected: 100 or more people affected/injured/homeless.
 ###  -    Declaration/international appeal: Declaration by the country of a state of emergency and/or an appeal for international assistance
 
+# Repository Description
+In this repository, you will find two folders containing data files, one folder with Jupyter notebooks and one folder entitled Heroku. The two data folders in the repository's main directory can be ignored. The Jupyter Notebook folder holds notebooks for data gathering, cleaning and loading as well as one notebook named EDA used to quickly visualize with Pandas and Matplotlib. The Heroku folder contains three subsequent folders and the Flask App script. The data folder holds all the data files that were loaded into AWS and Heroku's database. The static folder holds the CSS and JavaScript code for the website, while the templates folder contains the HTML files. We created a separate [repository](https://github.com/nitchon/disasters) for Heroku to use for deployment with the requisite files, such as text files for requirements and runtime.
 
 ## Objectives
 - Identify the areas on Earth that are most affected by natural disasters.
@@ -22,11 +24,6 @@ https://n-disaster.herokuapp.com/type
 - Identify trends that uncover information predicting future disasters.
 - Identify the total deaths that occur as a result of natural disasters.
 - Visualize and present the data on natural disasters over the past century. 
-
-
-
-
-
 
 
 ## 🚀 Fun Facts
