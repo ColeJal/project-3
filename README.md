@@ -1,22 +1,17 @@
 # Natural Disasters Around World
-Project #3 - October, 2022
 
-See our website at:
-https://n-disaster.herokuapp.com/
 
 ![Logo](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGoJJBsuXLDEAUAk7qqQg-URz8Odn4BADnIA&usqp=CAU) 
 # Description
-We explored the Natural Disaster occurences from around the world. The dataset used compiled each natural disaster in the EM-DAT (Emergency Events Database). To start using Pandas, we filtered the dataset only for natural disasters, deleted any unnecessary columns and converted dates to a usable format. From there, it was a matter of creating and save data files needed to final visualizations. We took advantage of Jupyter Notebook's interactive interface as well as Pandas and Matplotlib for quick visualizations and to get a sense of what is happening in the world.
+The team explored the Natural Disaster occurences from around the world. The dataset used compiled each natural disaster in the EM-DAT (Emergency Events Database). To start using Pandas, we filtered the dataset only for natural disasters, deleted any unnecessary columns and converted dates to a usable format. From there, it was a matter of creating and save data files needed to final visualizations. We took advantage of Jupyter Notebook's interactive interface as well as Pandas and Matplotlib for quick visualizations and to get a sense of what is happening in the world. After the team decided on the final visualizations, team members started compiling HTML pages and the background JavaScript logic for the website. There are six webpages in total. We used a variety of JS libraries, including D3, Plotly, Chart.JS and Leaflet.
 
+Once we got the website working locally, we began on building the Flask app script to render the HTML as well as deliver the correct datasets per webpage. Admittedly the Flask app script is cluttered and cumbersome to the eyes. Future iterations of this website will seek to de-cluttered the script and reduce the number of saved datasets. Before deployment, the team worked on the CSS and final styling of the website. A Punk band lead singer is only as good as their eyeliner, therefore the team wanted to make sure the website looked as pretty as possible. To further prepare for deployment, the team filled the Heroku database with our disaster data and played with the connection string to ensure the Flask app deliver the correct data.
 
-
-**_The following criteria must be met in order for an event to be entered into the database:_**
-###  -    Deaths: 10 of more people deaths
-###  -    Affected: 100 or more people affected/injured/homeless.
-###  -    Declaration/international appeal: Declaration by the country of a state of emergency and/or an appeal for international assistance
+Finally, the team created a cleaned up repository for Heroku deployment. You can view the [Disaster website](https://n-disaster.herokuapp.com/).
 
 # Repository Description
 In this repository, you will find two folders containing data files, one folder with Jupyter notebooks and one folder entitled Heroku. The two data folders in the repository's main directory can be ignored. The Jupyter Notebook folder holds notebooks for data gathering, cleaning and loading as well as one notebook named EDA used to quickly visualize with Pandas and Matplotlib. The Heroku folder contains three subsequent folders and the Flask App script. The data folder holds all the data files that were loaded into AWS and Heroku's database. The static folder holds the CSS and JavaScript code for the website, while the templates folder contains the HTML files. We created a separate [repository](https://github.com/nitchon/disasters) for Heroku to use for deployment with the requisite files, such as text files for requirements and runtime.
+
 
 ## Objectives
 - Identify the areas on Earth that are most affected by natural disasters.
@@ -24,6 +19,13 @@ In this repository, you will find two folders containing data files, one folder 
 - Identify trends that uncover information predicting future disasters.
 - Identify the total deaths that occur as a result of natural disasters.
 - Visualize and present the data on natural disasters over the past century. 
+
+
+**_The following criteria must be met in order for an event to be entered into the database:_**
+  -    Deaths: 10 of more people deaths
+  -    Affected: 100 or more people affected/injured/homeless.
+  -    Declaration/international appeal: Declaration by the country of a state of emergency and/or an appeal for international assistance
+
 
 
 ## 🚀 Fun Facts
@@ -35,13 +37,8 @@ In this repository, you will find two folders containing data files, one folder 
 3)  Nearly 50% of the fatalities caused by natural disasters in 2012 were due to hydrological events like flooding or mass movements
 
 
-  
-    
-
-
-
-
-
+# Project Status
+While project week is over, our website is far from finished. After some helpful feedback from staff and instructors, we have targeted updates to improve the website. The first improvement involves the data analysis. While raw numbers are great, displaying and visualizing raw numbers may not give an accurate depiction. Taking the raw numbers of deaths for instance. With a large population, it make senses China suffers many deaths. But more interesting is the proportion of deaths of the overall population in a country.
 
 
 
