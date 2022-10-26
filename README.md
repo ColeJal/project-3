@@ -42,7 +42,7 @@ While project week is over, our website is far from finished. After some helpful
 
 Another revision to the visualizations includes creating an event listener/handler that would update legends on choropleth maps depending on which layer is selected. We were unable to figure it out before the deadline, but it would make the maps more comprehensible. In addition, scatter plots exploring GDP per capita/CO2 emissions per capita versus death rates could be a worthwhile endeavor for more conclusions.
 
-The second improvement involves politics. We can sit here listing policies addressing climate change that we haven't all heard before, but the most concrete policy we can give is: vote. It does not help that a significant portion of the United States population believe climate change is not real.
+The second improvement involves politics. We can sit here listing policies addressing climate change that we haven't all heard before, but it does not help that a significant portion of the United States population believe climate change is not real. It does not help that more than half the Senate, including two Democratic senators, want nothing to do with dismantling our current energy sources and leaning into renewables. Therefore, our policy is quite simple: vote. In a future iteration of the website, we would like to include resources for climate change legislation as well as a candidate spotlight highlighting key races across the country each year. As budding data scientists, we would like to paint a brighter picture for you, but unless leadership and public opinion changes, we are stuck in an endless cycle of despair. Every vote counts, every vote matters.
 
 
 
