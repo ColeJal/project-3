@@ -38,7 +38,11 @@ In this repository, you will find two folders containing data files, one folder 
 
 
 # Project Status
-While project week is over, our website is far from finished. After some helpful feedback from staff and instructors, we have targeted updates to improve the website. The first improvement involves the data analysis. While raw numbers are great, displaying and visualizing raw numbers may not give an accurate depiction. Taking the raw numbers of deaths for instance. With a large population, it make senses China suffers many deaths. But more interesting is the proportion of deaths of the overall population in a country.
+While project week is over, our website is far from finished. After some helpful feedback from staff and instructors, we have targeted updates to improve the website. The first improvement involves the data analysis. While raw numbers are great, displaying and visualizing raw numbers may not give an accurate depiction. Taking the raw numbers of deaths for instance. With a large population, it make senses China suffers many deaths. But more interesting is the proportion of deaths of the overall population in a country. This would illuminate on which country is suffering the most in terms for deaths as a result of natural disasters. To that end, creating a control slider that would return deaths as a percentage of a country's population for that specific year is in the works.
+
+Another revision to the visualizations includes creating an event listener/handler that would update legends on choropleth maps depending on which layer is selected. We were unable to figure it out before the deadline, but it would make the maps more comprehensible. In addition, scatter plots exploring GDP per capita/CO2 emissions per capita versus death rates could be a worthwhile endeavor for more conclusions.
+
+The second improvement involves politics. We can sit here listing policies addressing climate change that we haven't all heard before, but the most concrete policy we can give is: vote. It does not help that a significant portion of the United States population believe climate change is not real.
 
 
 
